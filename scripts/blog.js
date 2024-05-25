@@ -41,7 +41,7 @@ window.onload = function () {
         const blog = content[i];
         let card = `
             <div class='card-container'>
-                <div class="card" onclick='clickCard(\""${blog.blog_html}"\")'>
+                <div class="card" onclick='clickCard(\"${blog.blog_html}")'>
                     <img src="${blog.image}" alt="${blog.title}" class="card-img-top"> <!-- Add this line -->
                     <div class="card-body">
                     <a class='title'><h3 class="card-title">${blog.title}</h3></a>
