@@ -1,8 +1,9 @@
 [
     {
       "id": 1,
-      "title": "Why RPA?",
-      "blog_html": "./blogs/rpa.html",
+      "title": "Why (Robotic Process Automation) RPA?",
+      "blog_html": "/blogs/rpa.html",
+      "image": "/images/blogs/rpa.png",
       "body": "Unlock the power of automation with RPA - Streamline operations, elevate productivity, and liberate your team from repetitive tasks. Explore why RPA is the secret weapon for businesses striving for efficiency and innovation."
     }
 ]

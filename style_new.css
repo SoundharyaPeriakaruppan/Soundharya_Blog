@@ -265,10 +265,6 @@
       display: flex;
       flex-wrap: wrap;
       text-align:right;
-      color:red;
-      display: inline-block;
-      margin-left: 30px;
-
   }
       .header .logo, .header .nav {
           flex-grow: 1;
@@ -550,3 +546,49 @@
       }
   }
   
+  .card-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
+  }
+  
+  .card {
+    background-color: #f3f3f3;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    width: 100%; /* make the card take full width */
+    max-width: 900px; /* you can adjust this value based on your layout */
+    margin: 20px 0; /* adjust vertical margin */
+    padding: 20px; /* add some padding inside the card */
+    transition: 0.3s;
+    cursor: pointer;
+  }
+  
+  .card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  }
+  
+  .card-content {
+    padding: 20px 0; /* adjust padding inside the card content */
+  }
+  .logo-text {
+    color: black;
+    margin: 0;
+  }
+  
+  @media screen and (max-width: 925px) {
+    .header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .logo, .nav {
+      justify-content: center;
+    }
+  }
+  .card-img-top {
+    width: 100%;
+    height: auto;
+  }

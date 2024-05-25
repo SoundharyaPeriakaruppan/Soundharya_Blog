@@ -33,12 +33,25 @@ window.onload = function () {
     let getHtml = document.getElementById("blog");
     let finalHtml = '';
     for (let i = 0; i < content.length; i++) {
-        let htmlContent = '<div>';
-        htmlContent += "<div class='card-container'>";
-        htmlContent += "<div class='card' onclick='clickCard(\""+content[i].blog_html+"\")'>"; 
-        htmlContent += "<h3>" + content[i].title + "</h3>" + "<br>";
-        htmlContent += "<div class='card-content'>" + content[i].body + "</div>" + "</div>" + "</div>" + "</div>";
-        finalHtml += htmlContent;    
+        // let htmlContent = '<div>';
+        // htmlContent += "<div class='card-container'>";
+        // htmlContent += "<div class='card' onclick='clickCard(\""+content[i].blog_html+"\")'>"; 
+        // htmlContent += "<h3><a class='title'>" + content[i].title + "</a></h3>" + "<br>";
+        // htmlContent += "<div class='card-content'>" + content[i].body + "</div>" + "</div>" + "</div>" + "</div>";
+        const blog = content[i];
+        let card = `
+            <div class='card-container'>
+                <div class="card" onclick='clickCard(\""${blog.blog_html}"\")'>
+                    <img src="${blog.image}" alt="${blog.title}" class="card-img-top"> <!-- Add this line -->
+                    <div class="card-body">
+                    <a class='title'><h3 class="card-title">${blog.title}</h3></a>
+                    <p class="card-content">${blog.body}</p>
+                    <a href="${blog.blog_html}" class="btn btn-primary">Read More</a>
+                    </div>
+                </div>
+            </div>
+            `;
+        finalHtml += card;
     }
     getHtml.innerHTML += finalHtml;
   }
