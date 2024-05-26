@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title text-red>About RPA</title text-red>
+    <link rel="stylesheet" href="/style_new.css">
+    <script src="/scripts/common.js"></script>
+    <script>
+        
+    </script>
+</head>
+<body>
+    
+    <div id="blog" class="container wrap">
+        <div id="header"></div>
+        <h2 class="text-red"><strong> An Introduction to Security Testing</strong></h2>
+        <div class="content">
+            <p>In today's digital age, data security has never been more important. As we increasingly rely on web applications for everything from online banking to social networking, these applications become attractive targets for malicious actors. This is where security testing comes in.</p>
+            <p>
+                Security testing is a crucial aspect of software development that aims to uncover vulnerabilities and weaknesses in a system. Its primary goal is to ensure that the system's data and resources are protected from potential threats. It involves a series of tests and practices designed to find and address security gaps in an application's defense.
+
+                The need for security testing has grown exponentially with the rise in cyber attacks, such as Cross-Site Scripting (XSS), Cross-Site Request Forgery (CSRF), SQL Injection, and others. These attacks exploit vulnerabilities in an application, leading to unauthorized access, data theft, or even denial of service.
+
+                Understanding these threats and knowing how to test for them is vital. In this blog post, we'll delve into some of the most common types of security vulnerabilities that can affect web applications - XSS, CSRF, Content Security Policy (CSP), Cross-Origin Resource Sharing (CORS), and SQL Injection. We'll explore what they are, how they work, and most importantly, how we can test for and prevent them.
+            </p>
+            <p>
+                <h3 class="title text-red">Cross Site Scripting(XSS)</h3>
+                <div>
+                    Cross-Site Scripting, often abbreviated as XSS, is a type of security vulnerability that allows attackers to inject malicious scripts into web pages viewed by other users. These scripts run in the context of the victim's browser and can be used to steal sensitive information, perform actions on behalf of the user, or deface websites.
+                </div>
+                <h4 class="title text-red">Stored XSS</h4>
+                <div>
+                    The malicious script is permanently stored on the target server (for example, in a database). When a user accesses a page that loads this data, the script is also loaded and executed.
+                </div>
+                <h4 class="title text-red">Reflected XSS</h4>
+                <div>
+                    The malicious script is included as part of a URL. When a user clicks on this URL, the script is executed.
+                </div>
+                <h4 class="title text-red">DOM-based XSS</h4>
+                <div>
+                    The malicious script manipulates the Document Object Model (DOM) of a web page, changing its structure and functionality.
+                </div>
+                <h4 class="title text-red">Example:</h4>
+                <div>We've a form where users can submit their names, and this name is then displayed on a "Thanks For Submission" page. Now input the below value and see the magic.</div>
+                <pre>&lt;img src=x onerror="alert('XSS')"&gt;</pre>
+                </div>
+                <div>
+                    <form action="security/thankyou.html" method="get">
+                        <label for="name">Enter your name:</label><br>
+                        <input type="text" id="name" name="name"><br>
+                        <input type="submit" value="Submit">
+                    </form>
+                </div>
+                <div>
+                    <h4 class="text-red">The Why?</h4>
+                    Now we'll understand  why xss happened and how to prevent it.
+                    <div>
+                        The user is asked to enter their name in a form. The entered name is then displayed on a "Thanks For Submission" page. If the user enters a string like &lt;img src=x onerror="alert('XSS')"&gt;, the string will be treated as HTML code when it is displayed on the "Thanks For Submission" page. 
+                    </div>
+                    <div>    
+                        In thankyou.html, the entered name is retrieved from the URL query parameters and displayed on the page using innerHTML like below.
+                        <pre>
+                            <span>const urlParams = new URLSearchParams(window.location.search);</span><br><span>const name = urlParams.get('name');</span><br><span class="highlight">document.getElementById("greeting").innerHTML += name;</span>
+                        </pre>
+                        This allows the injected script to execute in the context of the user's browser, leading to a Cross-Site Scripting (XSS) attack.
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-red">Mitigation & Prevention</h4>
+                    <div>
+                        <div>
+                            <span class="text-red">Input Validation: </span> 
+                            <span>
+                                User input to ensure it's in the expected format. This can help prevent malicious scripts from being injected into your application.
+                            </span>
+                        </div>
+                        <div>
+                            <span class="text-red">Encoding/Escaping: </span>
+                            <span>
+                                When user-supplied data is included in HTML content, it should be properly escaped. This means special characters are replaced with their HTML-encoded equivalents. For example, < becomes &lt;, > becomes &gt;, etc. This prevents the browser from interpreting these characters as part of HTML tags or entities
+                            </span>
+                        </div>
+                        <div>
+                            <span class="text-red">HTTP-Only Cookies: </span>
+                            <span>
+                                Setting the HttpOnly flag for cookies helps mitigate the risk of an attacker stealing session cookies through an XSS attack. This makes the cookie inaccessible to client-side scripts.
+                            </span>
+                        </div>
+                        <div>
+                            <span class="text-red">Content Security Policy (CSP) </span>
+                            <span>
+                                Implementing CSP allows you to specify which domains the browser should consider as valid sources of executable scripts. It's a powerful tool that can effectively stop XSS if implemented correctly. More about this later.
+                            </span>
+                        </div>
+                        <div>
+                            <span class="text-red">Security Headers </span>
+                            <span>
+                                There are several HTTP security headers like X-XSS-Protection which can add extra layers of security against XSS attacks.
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                
+            </p>
+        </div>
+    </div>
+        
+    
+</body>
+</html>
+
+<!-- Cross-Origin Resource Sharing (CORS) is a browser-based security mechanism that allows a web page from one domain to access resources from a different domain. It’s a relaxation of the Same-Origin Policy, which typically restricts such interactions for security reasons. -->
+
+<!-- How CORS Works: -->
+
+<!-- Request: A browser sends a request to a server on a different domain (cross-origin request). -->
+<!-- Headers: The server responds with specific HTTP headers that indicate whether the requesting origin is allowed to access the resource. -->
+<!-- Browser Check: The browser examines the headers to determine if the cross-origin request is permitted based on the provided CORS configuration. -->
+<!-- Access Granted/Denied: If allowed, the browser processes the response; otherwise, it blocks the request. -->
+<!-- Key CORS Headers: -->
+
+<!-- Access-Control-Allow-Origin: Specifies which origins are allowed to access the resource (e.g., “ for all, or a specific domain). -->
+<!-- Access-Control-Allow-Methods: Indicates the allowed HTTP methods (e.g., GET, POST, PUT). -->
+<!-- Access-Control-Allow-Headers: Lists the allowed request headers. -->
+<!-- Access-Control-Max-Age: Caches the results of a preflight request for a specified time. -->
+
+<!-- Access-Control-Allow-Origin: https://example.com -->
+<!-- Access-Control-Allow-Methods: GET, POST -->
+
+<!-- Preflight Requests: -->
+
+<!-- For requests that could potentially modify data (e.g., PUT, DELETE), the browser might send an OPTIONS request first to check if the actual request is allowed, based on the CORS headers. -->
+
+<!-- Why CORS is Important: -->
+
+<!-- Enables building web applications that consume APIs or resources from different domains. -->
+<!-- Facilitates secure cross-origin communication while protecting against unauthorized access. -->
+<!-- Crucial for Single Page Applications (SPAs) and modern web development practices. -->
+
+
+<!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->

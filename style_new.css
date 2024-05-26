@@ -550,6 +550,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-between;
     margin: 20px 0;
   }
   
@@ -591,4 +593,65 @@
   .card-img-top {
     width: 100%;
     height: auto;
+  }
+  .text-red{
+    color: #ff3300;
+  }
+  form {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 5px;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  
+  form label {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  form input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  form input[type="submit"] {
+    background-color: #ff3300;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  form input[type="submit"]:hover {
+    background-color: #ff3300;
+  }
+
+  pre {
+    background-color: #282c34;
+    color: #abb2bf;
+    padding: 20px;
+    border-radius: 5px;
+    overflow-x: auto;
+    font-family: 'Courier New', Courier, monospace;
+    line-height: 1.5;
+    tab-size: 4;
+    white-space: pre-wrap; /* Since CSS3 */
+    white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+    white-space: -pre-wrap; /* Opera 4-6 */
+    white-space: -o-pre-wrap; /* Opera 7 */
+    word-wrap: break-word; /* Internet Explorer 5.5+ */
+  }
+  
+  /* Optional: Highlight syntax like some IDEs */
+  pre span.keyword { color: #c678dd; }
+  pre span.string { color: #98c379; }
+  pre span.number { color: #d19a66; }
+  pre span.highlight { color: #e06c75; }
+  pre span {
+    white-space: nowrap;
   }

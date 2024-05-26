@@ -31,7 +31,7 @@ window.onload = function () {
 
   function processBlogResponse(content) {
     let getHtml = document.getElementById("blog");
-    let finalHtml = '';
+    let finalHtml = "<div class='card-container'>";
     for (let i = 0; i < content.length; i++) {
         // let htmlContent = '<div>';
         // htmlContent += "<div class='card-container'>";
@@ -40,19 +40,18 @@ window.onload = function () {
         // htmlContent += "<div class='card-content'>" + content[i].body + "</div>" + "</div>" + "</div>" + "</div>";
         const blog = content[i];
         let card = `
-            <div class='card-container'>
                 <div class="card" onclick='clickCard(\"${blog.blog_html}")'>
-                    <img src="${blog.image}" alt="${blog.title}" class="card-img-top"> <!-- Add this line -->
+                    <!-- <img src="${blog.image}" alt="${blog.title}" class="card-img-top" height="200"> -->
                     <div class="card-body">
                     <a class='title'><h3 class="card-title">${blog.title}</h3></a>
                     <p class="card-content">${blog.body}</p>
                     <a href="${blog.blog_html}" class="btn btn-primary">Read More</a>
                     </div>
                 </div>
-            </div>
             `;
         finalHtml += card;
     }
+    finalHtml+="</div>";
     getHtml.innerHTML += finalHtml;
   }
 }
