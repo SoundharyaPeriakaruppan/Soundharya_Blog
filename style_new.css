@@ -655,3 +655,6 @@
   pre span {
     white-space: nowrap;
   }
+  margin10{
+    margin: 10px;
+  }

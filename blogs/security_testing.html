@@ -7,7 +7,24 @@
     <link rel="stylesheet" href="/style_new.css">
     <script src="/scripts/common.js"></script>
     <script>
-        
+        function makePutRequest(){
+            const url = 'https://jsonplaceholder.typicode.com/posts/1';
+            const data = {
+                title: 'foo',
+                body: 'bar',
+                userId: 1
+            };
+            fetch(url, {
+            method: 'PUT', 
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data), 
+            })
+            .then(response => response.json())
+            .then(json => console.log(json))
+            .catch((error) => console.error('Error:', error));
+        } 
     </script>
 </head>
 <body>
@@ -101,7 +118,91 @@
                         </div>
                     </div>
                 </div>
-                
+            </p>
+            <p>
+                <h3 class="title text-red">Cross-Site Request Forgery (CSRF)</h3>
+                <div>
+                    Cross-Site Request Forgery, or CSRF, is a type of attack that tricks the victim into submitting a malicious request. It exploits the trust that a site has in a user's browser. The attacker crafts a request that appears legitimate and tricks the user into executing it, often by embedding it in a link or email.Let's break it down with an example:
+                </div>
+                <h4 class="title text-red">Example:</h4>
+                <div>
+                    Imagine you're logged into your online banking account, and while keeping that tab open, you navigate to another website in a different tab. This other website, unbeknownst to you, is set up by an attacker and contains a form that's designed to transfer money from your bank account to the attacker's account.
+                </div>
+                <pre>
+                    <span>&lt;form action="http://xyzbank.com/transfer" method="POST"&gt;</span><br><span>&lt;input type="hidden" name="account" value="Attacker's Account Number"&gt;</span><br><span>&lt;input type="hidden" name="amount" value="1000"&gt;</span><br><span>&lt;input type="submit" value="Click to win a prize!"&gt;</span><br><span>&lt;/form&gt;</span>
+                </pre>
+                <div>The html for the same is as below:</div>
+                <form action="http://xyzbank.com/transfer" method="POST">
+                    <input type="hidden" name="account" value="Attacker's Account Number">
+                    <input type="hidden" name="amount" value="1000">
+                    <input type="submit" value="Click to win a prize!">
+                </form>
+                <div>
+                    When you click the "Click to win a prize!" button, the form is submitted. Because you're still logged into your bank in another tab, the browser automatically includes your banking cookies with the request.
+                    From the bank's perspective, it looks like a legitimate request to transfer money, because it's associated with your session. So, the bank processes the request and transfers the money to the attacker's account.
+                    This is a CSRF attack. The attacker has tricked you into making a request that you didn't intend to make.
+                </div>
+                <h4 class="title text-red">Mitigation & Prevention:</h4>
+                <div>
+                    To prevent CSRF attacks, websites can use anti-CSRF tokens. These are unique random values associated with a user's session. Any state-changing operation requires the token, and since the attacker doesn't know this token, they can't forge a valid request.
+
+                    Another mitigation strategy is using the SameSite cookie attribute. This attribute can prevent the browser from sending cookies along with cross-site requests, which helps protect against CSRF attacks.
+                </div>
+            </p>
+            <p>
+                <h3 class="title text-red">Cross-Origin Resource Sharing (CORS)</h3>
+                <div>
+                    Cross-Origin Resource Sharing (CORS) is a browser-based security mechanism that allows a web page from one domain to access resources from a different domain. It’s a relaxation of the Same-Origin Policy, which typically restricts such interactions for security reasons.
+                    <h4 class="text-red">How CORS Works:</h4>
+                    <div>
+                        <span class="text-red">Request: </span> A browser sends a request to a server on a different domain (cross-origin request).
+                    </div>
+                    <div>
+                        <span class="text-red">Headers:</span> The server responds with specific HTTP headers that indicate whether the requesting origin is allowed to access the resource.
+                    </div>
+                    <div>
+                        <span class="text-red">Browser Check:</span> The browser examines the headers to determine if the cross-origin request is permitted based on the provided CORS configuration.
+                    </div>
+                    <div>
+                        <span class="text-red">Access Granted/Denied:</span> If allowed, the browser processes the response; otherwise, it blocks the request.
+                    </div>
+                    <h4 class="text-red">Key CORS Headers:</h4>
+                    <div>
+                        <span class="text-red">Access-Control-Allow-Origin: </span> Specifies which origins are allowed to access the resource (e.g., “ for all, or a specific domain).
+                    </div>
+                    <div>
+                        <span class="text-red">Access-Control-Allow-Methods:</span> Indicates the allowed HTTP methods (e.g., GET, POST, PUT).
+                    </div>
+                    <div>
+                        <span class="text-red">Access-Control-Allow-Headers:</span> Lists the allowed request headers.
+                    </div>
+                    <div>
+                        <span class="text-red">Access-Control-Max-Age::</span> Caches the results of a preflight request for a specified time.
+                    </div>
+                </div>
+                <h4 class="title text-red">Example:</h4>
+                <div>
+                    If you want to allow requests from https://example.com to access your resources, you can set the following headers:
+                </div>
+                <pre>
+                    <span>Access-Control-Allow-Origin: https://example.com</span><br><span>Access-Control-Allow-Methods: GET, POST</span>
+                </pre>
+                <h4 class="title text-red">Preflight Requests:</h4>
+                <div>For requests that could potentially modify data (e.g., PUT, DELETE), the browser might send an OPTIONS request first to check if the actual request is allowed, based on the CORS headers.</div>
+                <h4 class="title text-red">Example:</h4>
+                <div>Click the below button to make a put request to <a href="https://jsonplaceholder.typicode.com/">{JSON} Placeholder mock server</a></div>
+                <button onclick="makePutRequest()">Make PUT Request</button>
+                <div>
+                    Open developer tools.You could see http calls being made in the network tab of the browser developer tools. You would have noticed preflight request with options being sent for the post request. Attached the images of the same.
+                </div>
+                <img src="/images/blogs/preflight_1.png" alt="Preflight Request" class="margin10">
+                <img src="/images/blogs/preflight_2.png" alt="Preflight Request" class="margin10">
+                <h4 class="title text-red">Why CORS is Important:</h4>
+                <div>
+                    <li>Enables building web applications that consume APIs or resources from different domains.</li>
+                    <li>Facilitates secure cross-origin communication while protecting against unauthorized access.
+                    </li>
+                </div>
             </p>
         </div>
     </div>
