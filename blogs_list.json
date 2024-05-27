@@ -15,9 +15,9 @@
     },
     {
       "id": 3,
-      "title": "GitHub CheatSheet",
-      "blog_html": "/blogs/CheatSheet_git.html",
+      "title": "Mastering GitHub Comments: Your Ultimate Cheat Sheet",
+      "blog_html": "/blogs/cheatSheet.html",
       "image": "/images/blogs/githublogo.png",
-      "body": "Dive into the world of security testing and discover how to bulletproof your applications against common cyber threats."
+      "body": "Maximize your GitHub efficiency with our concise cheat sheet for comments. Quickly format text, link issues, and enhance collaboration with these essential Markdown shortcuts."
     }
 ]
