@@ -1,4 +1,6 @@
-
+html {
+    scroll-behavior: smooth;
+}
 @font-face {
     font-family: 'EB Garamond';
     font-style: italic;
@@ -655,6 +657,36 @@
   pre span {
     white-space: nowrap;
   }
-  margin10{
+  .margin10{
     margin: 10px;
+  }
+
+  #table-of-contents {
+    font-family: Arial, sans-serif;
+    line-height: 1.2;
+  }
+  
+  #table-of-contents .heading {
+    font-size: 0.8em; /* Adjust as needed */
+  }
+  
+  #table-of-contents .sub-heading {
+    font-size: 0.7em; /* Adjust as needed */
+  }
+
+  #table-of-contents li {
+    list-style-type: none;
+    margin-bottom: 10px;
+  }
+  
+  #table-of-contents a {
+    text-decoration: none;
+  }
+  
+  #table-of-contents a:hover {
+    text-decoration: underline;
+  }
+  
+  #table-of-contents li li {
+    margin-left: 20px;
   }

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title text-red>About RPA</title text-red>
-    <link rel="stylesheet" href="/style_new.css">
+    <link rel="stylesheet" href="/style.css">
     <script src="/scripts/common.js"></script>
     <script>
         function makePutRequest(){
@@ -41,6 +41,7 @@
 
                 Understanding these threats and knowing how to test for them is vital. In this blog post, we'll delve into some of the most common types of security vulnerabilities that can affect web applications - XSS, CSRF, Content Security Policy (CSP), Cross-Origin Resource Sharing (CORS), and SQL Injection. We'll explore what they are, how they work, and most importantly, how we can test for and prevent them.
             </p>
+            <div id="table-of-contents"></div>
             <p>
                 <h3 class="title text-red">Cross Site Scripting(XSS)</h3>
                 <div>
@@ -58,7 +59,7 @@
                 <div>
                     The malicious script manipulates the Document Object Model (DOM) of a web page, changing its structure and functionality.
                 </div>
-                <h4 class="title text-red">Example:</h4>
+                <h4 class="title text-red">Demo</h4>
                 <div>We've a form where users can submit their names, and this name is then displayed on a "Thanks For Submission" page. Now input the below value and see the magic.</div>
                 <pre>&lt;img src=x onerror="alert('XSS')"&gt;</pre>
                 </div>
