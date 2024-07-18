@@ -8,6 +8,7 @@ var tags = function (tags){
     };
     return tagString;
 }
+let finalHtmlAll="";
 var search = function(clickedtag){
     console.log(clickedtag);
     fetch("./blogs_list.json")    
@@ -34,6 +35,7 @@ var search = function(clickedtag){
         let getHtml = document.getElementById("blog");
         getHtml.innerHTML = "";
         let finalHtml = "<div class='card-container'>";
+       
         //Iterating and creating blog cards
         for (let i = 0; i < content.length; i++) {
             const blog = content[i];
@@ -60,7 +62,32 @@ var search = function(clickedtag){
         finalHtml+="</div>";
         getHtml.innerHTML += finalHtml;
       
-
+        
+            console.log("hi");
+            for (let i = 0; i < content.length; i++) {
+                const blog = content[i];
+                console.log(blog);
+                if(clickedtag==="All"){ 
+                let card = `
+                        <div class="card" onclick='clickCard(\"${blog.blog_html}")'>
+                            <img src="${blog.image}" alt="${blog.title}" class="card-img-top" height="200">
+                            <div class="card-body">
+                            <a class='title'><h3 class="card-title">${blog.title}</h3></a>
+                            <p class="card-content">${blog.body}</p>
+                             </div>
+                             </div>
+                            <div class="CardFooter">
+                            <a href="${blog.blog_html}" class="btn btn-primary">Read More</a>
+        
+                            </div>`;
+        
+                    
+                finalHtmlAll += card;
+                }
+            }
+            finalHtmlAll+="</div>";
+            getHtml.innerHTML += finalHtmlAll;
+        
       
     }
 }
@@ -124,7 +151,10 @@ window.onload = function () {
 let Alltags=[];
 let uniqueTags=[];
 const seen = {};
+let Allblogs="";
 let card="";
+let dummycard="All";
+
 window.onload = function () {
   // Fetch data from the URL
   if(!blogsList){
@@ -153,11 +183,12 @@ window.onload = function () {
   let finalHtmlblog="";
   function processBlogResponse(content) {
     let getHtml = document.getElementById("taglist");
-     finalHtml = "<div class='item'>";
+     finalHtml = `<div class='item'>`;
     //Iterating and creating blog cards
-   
+    uniqueTags.push(dummycard);
     for (let i = 0; i < content.length; i++) {
         const blog = content[i];
+
          singleTag=blog.tags;
         singleTag.forEach(element => {
        Alltags=element;
@@ -167,12 +198,14 @@ window.onload = function () {
       }
             
         });
-       
+      
 
          
             //console.log(Alltags);
         //finalHtml += card;
     }
+    
+   
    card+= `<div>
         ${tags(uniqueTags)}
          </div>`
@@ -181,7 +214,9 @@ window.onload = function () {
           finalHtmlblog = "<div class='card-container'>";
    for (let i = 0; i < content.length; i++) {
         const blog = content[i];
-        let card = `
+
+            
+        finalHtmlblog += `
                 <div class="card" onclick='clickCard(\"${blog.blog_html}")'>
                     <img src="${blog.image}" alt="${blog.title}" class="card-img-top" height="200">
                     <div class="card-body">
@@ -197,13 +232,11 @@ window.onload = function () {
                    
                 
             `;
-
-            
-        finalHtmlblog += card;
     }
     //console.log(uniqueTags);
     finalHtml+="</div>";
     finalHtmlblog +="</div>";
+   
     getHtml.innerHTML += finalHtml;
     getHtmlblog.innerHTML+=finalHtmlblog;
     
