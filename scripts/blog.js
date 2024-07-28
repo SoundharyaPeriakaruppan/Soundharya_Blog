@@ -40,7 +40,7 @@ var search = function(clickedtag){
         for (let i = 0; i < content.length; i++) {
             const blog = content[i];
             console.log(blog);
-            if(blog["tags"].includes(clickedtag)){
+            if(blog["tags"].includes(clickedtag)||clickedtag=="All"){
             let card = `
                     <div class="card" onclick='clickCard(\"${blog.blog_html}")'>
                         <img src="${blog.image}" alt="${blog.title}" class="card-img-top" height="200">
@@ -63,30 +63,30 @@ var search = function(clickedtag){
         getHtml.innerHTML += finalHtml;
       
         
-            console.log("hi");
-            for (let i = 0; i < content.length; i++) {
-                const blog = content[i];
-                console.log(blog);
-                if(clickedtag==="All"){ 
-                let card = `
-                        <div class="card" onclick='clickCard(\"${blog.blog_html}")'>
-                            <img src="${blog.image}" alt="${blog.title}" class="card-img-top" height="200">
-                            <div class="card-body">
-                            <a class='title'><h3 class="card-title">${blog.title}</h3></a>
-                            <p class="card-content">${blog.body}</p>
-                             </div>
-                             </div>
-                            <div class="CardFooter">
-                            <a href="${blog.blog_html}" class="btn btn-primary">Read More</a>
+            // console.log("hi");
+            // for (let i = 0; i < content.length; i++) {
+            //     const blog = content[i];
+            //     console.log(blog);
+            //     if(clickedtag==="All"){ 
+            //     let card = `
+            //             <div class="card" onclick='clickCard(\"${blog.blog_html}")'>
+            //                 <img src="${blog.image}" alt="${blog.title}" class="card-img-top" height="200">
+            //                 <div class="card-body">
+            //                 <a class='title'><h3 class="card-title">${blog.title}</h3></a>
+            //                 <p class="card-content">${blog.body}</p>
+            //                  </div>
+            //                  </div>
+            //                 <div class="CardFooter">
+            //                 <a href="${blog.blog_html}" class="btn btn-primary">Read More</a>
         
-                            </div>`;
+            //                 </div>`;
         
                     
-                finalHtmlAll += card;
-                }
-            }
-            finalHtmlAll+="</div>";
-            getHtml.innerHTML += finalHtmlAll;
+            //     finalHtmlAll += card;
+            //     }
+            // }
+            // finalHtmlAll+="</div>";
+            // getHtml.innerHTML += finalHtmlAll;
         
       
     }
