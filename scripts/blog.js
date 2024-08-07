@@ -10,6 +10,17 @@ var tags = function (tags){
 }
 let finalHtmlAll="";
 var search = function(clickedtag){
+    // Get all tags
+    var tagElements = document.getElementsByClassName('tags');
+
+    // Remove the 'selected' class from all tags
+    for (var i = 0; i < tagElements.length; i++) {
+        tagElements[i].classList.remove('selected');
+    }
+
+    // Add the 'selected' class to the clicked tag
+    event.target.classList.add('selected');
+
     console.log(clickedtag);
     fetch("./blogs_list.json")    
     .then(response => {
@@ -48,12 +59,14 @@ var search = function(clickedtag){
                         <a class='title'><h3 class="card-title">${blog.title}</h3></a>
                         <p class="card-content">${blog.body}</p>
                          </div>
-                         </div>
-                        <div class="CardFooter">
+                         <div class="card-footer">
+                         <div style="padding-bottom:10px">
                         <a href="${blog.blog_html}" class="btn btn-primary">Read More</a>
-    
+                        </div>
                         ${tags(blog.tags)}
-                        </div>`;
+                        </div>
+                         </div>
+                        `;
     
                 
             finalHtml += card;
@@ -61,34 +74,6 @@ var search = function(clickedtag){
         }
         finalHtml+="</div>";
         getHtml.innerHTML += finalHtml;
-      
-        
-            // console.log("hi");
-            // for (let i = 0; i < content.length; i++) {
-            //     const blog = content[i];
-            //     console.log(blog);
-            //     if(clickedtag==="All"){ 
-            //     let card = `
-            //             <div class="card" onclick='clickCard(\"${blog.blog_html}")'>
-            //                 <img src="${blog.image}" alt="${blog.title}" class="card-img-top" height="200">
-            //                 <div class="card-body">
-            //                 <a class='title'><h3 class="card-title">${blog.title}</h3></a>
-            //                 <p class="card-content">${blog.body}</p>
-            //                  </div>
-            //                  </div>
-            //                 <div class="CardFooter">
-            //                 <a href="${blog.blog_html}" class="btn btn-primary">Read More</a>
-        
-            //                 </div>`;
-        
-                    
-            //     finalHtmlAll += card;
-            //     }
-            // }
-            // finalHtmlAll+="</div>";
-            // getHtml.innerHTML += finalHtmlAll;
-        
-      
     }
 }
 let blogsList;
@@ -130,14 +115,13 @@ window.onload = function () {
                     <a class='title'><h3 class="card-title">${blog.title}</h3></a>
                     <p class="card-content">${blog.body}</p>
                      </div>
-                     </div>
-                    <div class="CardFooter">
+                     <div class="card-footer">
+                     <div style="padding-bottom:10px">
                     <a href="${blog.blog_html}" class="btn btn-primary">Read More</a>
-
+                    </div>
                     ${tags(blog.tags)}
                     </div>
-                   
-                
+                     </div>
             `;
 
             
@@ -223,14 +207,13 @@ window.onload = function () {
                     <a class='title'><h3 class="card-title">${blog.title}</h3></a>
                     <p class="card-content">${blog.body}</p>
                      </div>
-                     </div>
-                    <div class="CardFooter">
+                     <div class="card-footer">
+                     <div style="padding-bottom:10px">
                     <a href="${blog.blog_html}" class="btn btn-primary">Read More</a>
-
+                    </div>
                     ${tags(blog.tags)}
                     </div>
-                   
-                
+                     </div>
             `;
     }
     //console.log(uniqueTags);

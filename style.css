@@ -690,3 +690,39 @@ html {
   #table-of-contents li li {
     margin-left: 20px;
   }
+
+  .tags {
+    display: inline-block;
+    cursor: pointer;
+    border: 0.5px solid #333;
+    margin: 0 5px;
+    padding: 2px 8px;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    font-size: 0.7em;
+    color: #333;
+  }
+
+  .card-footer {
+    padding: 10px;
+    border-top: 1px solid #e0e0e0; /* Light gray border */
+  }
+  
+  .card-footer .btn {
+    margin-top: 10px; /* Adds some space above the button */
+  }
+  
+  .card-footer .tag {
+    display: inline-block;
+    margin: 0 5px;
+    padding: 2px 8px;
+    background-color: #007bff; /* Blue background */
+    color: #ffffff; /* White text */
+    border-radius: 4px;
+    font-size: 0.8em;
+  }
+
+  .selected {
+    background-color: #ff3300; /* Blue background */
+    color: #ffffff; /* White text */
+  }
